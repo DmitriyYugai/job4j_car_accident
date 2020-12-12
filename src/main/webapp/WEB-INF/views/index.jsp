@@ -14,13 +14,19 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Firstname</th>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Text</th>
+                    <th>Address</th>
                 </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${users}" var="user">
+                    <c:forEach items="${accidents}" var="accident">
                         <tr>
-                            <td><c:out value="${user}"/></td>
+                            <td><c:out value="${accident.id}"/></td>
+                            <td><c:out value="${accident.name}"/></td>
+                            <td><c:out value="${accident.text}"/></td>
+                            <td><c:out value="${accident.address}"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>
