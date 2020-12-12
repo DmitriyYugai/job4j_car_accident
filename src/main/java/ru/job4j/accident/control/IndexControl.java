@@ -9,9 +9,15 @@ import java.util.Arrays;
 
 @Controller
 public class IndexControl {
+    private final AccidentMem store;
+
+    public IndexControl(AccidentMem store) {
+        this.store = store;
+    }
+
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("accidents", AccidentMem.instOf().findAllAccidents());
+        model.addAttribute("accidents", store.findAllAccidents());
         return "index";
     }
 }

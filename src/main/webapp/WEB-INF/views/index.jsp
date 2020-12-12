@@ -15,9 +15,9 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Name</th>
-                    <th>Text</th>
-                    <th>Address</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Адрес</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,6 +31,7 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <a href="<c:url value="/create"/>">Добавить инцидент</a>
         </div>
     </body>
 </html>
