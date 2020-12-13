@@ -27,6 +27,14 @@
             <label for="address">Адрес</label>
             <input type="text" class="form-control" id="address" placeholder="Укажите адрес" name="address">
         </div>
+        <div class="form-group">
+            <label for="type">Тип</label>
+            <select class="form-control" id="type" name="type.id">
+                <c:forEach var="type" items="${types}" >
+                    <option value="${type.id}">${type.name}</option>
+                </c:forEach>
+            </select>
+        </div>
         <button type="submit" class="btn btn-default">Добавить</button>
     </form>
 </div>
