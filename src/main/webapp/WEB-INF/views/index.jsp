@@ -19,6 +19,7 @@
                     <th>Описание</th>
                     <th>Адрес</th>
                     <th>Тип</th>
+                    <th>Статьи</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,11 @@
                             <td><c:out value="${accident.text}"/></td>
                             <td><c:out value="${accident.address}"/></td>
                             <td><c:out value="${accident.type.name}"/></td>
+                            <td>
+                                <c:forEach items="${accident.rules}" var="rule">
+                                    <c:out value="${rule.name}"/><br>
+                                </c:forEach>
+                            </td>
                             <td><a href="<c:url value="/update?id=${accident.id}"/>">Редактировать инцидент</a></td>
                         </tr>
                     </c:forEach>

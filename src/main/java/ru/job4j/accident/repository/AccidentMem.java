@@ -3,6 +3,7 @@ package ru.job4j.accident.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,18 +12,34 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AccidentMem {
     private final Map<Integer, Accident> accidents = new HashMap<>();
     private final Map<Integer, AccidentType> types = new HashMap<>();
-    private static final AtomicInteger ACCIDENT_ID = new AtomicInteger(4);
+    private final Map<Integer, Rule> rules = new HashMap<>();
+    private static final AtomicInteger ACCIDENT_ID = new AtomicInteger(3);
 
     private AccidentMem() {
+        rules.put(1, Rule.of(1, "Статья. 1"));
+        rules.put(2, Rule.of(2, "Статья. 2"));
+        rules.put(3, Rule.of(3, "Статья. 3"));
         types.put(1, AccidentType.of(1, "Две машины"));
         types.put(2, AccidentType.of(2, "Машина и человек"));
         types.put(3, AccidentType.of(3, "Машина и велосипед"));
-        accidents.put(1, new Accident(1, "Accident1", "Accident1","Accident1",
-                types.get(1)));
-        accidents.put(2, new Accident(2, "Accident2", "Accident2","Accident2",
-                types.get(2)));
-        accidents.put(3, new Accident(3, "Accident3", "Accident3","Accident3",
-                types.get(3)));
+        Accident accident1 = new Accident(1, "Accident1", "Accident1","Accident1",
+                types.get(1));
+        accident1.addRule(rules.get(1));
+        accident1.addRule(rules.get(2));
+        accident1.addRule(rules.get(3));
+        Accident accident2 = new Accident(2, "Accident2", "Accident2","Accident2",
+                types.get(2));
+        accident2.addRule(rules.get(1));
+        accident2.addRule(rules.get(2));
+        accident2.addRule(rules.get(3));
+        Accident accident3 = new Accident(3, "Accident3", "Accident3","Accident3",
+                types.get(3));
+        accident3.addRule(rules.get(1));
+        accident3.addRule(rules.get(2));
+        accident3.addRule(rules.get(3));
+        accidents.put(1, accident1);
+        accidents.put(2, accident2);
+        accidents.put(3, accident3);
     }
 
     private static class Holder {
@@ -58,6 +75,18 @@ public class AccidentMem {
     public Optional<AccidentType> findAccidentTypeById(int id) {
         if (types.containsKey(id)) {
             return Optional.of(types.get(id));
+        }
+        return Optional.empty();
+    }
+
+    public Collection<Rule> findAllRules() {
+        return rules.values();
+    }
+
+
+    public Optional<Rule> findRuleById(int id) {
+        if (rules.containsKey(id)) {
+            return Optional.of(rules.get(id));
         }
         return Optional.empty();
     }
