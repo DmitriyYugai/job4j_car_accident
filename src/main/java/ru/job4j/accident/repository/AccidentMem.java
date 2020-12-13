@@ -3,10 +3,7 @@ package ru.job4j.accident.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
@@ -37,5 +34,12 @@ public class AccidentMem {
 
     public Collection<Accident> findAllAccidents() {
         return accidents.values();
+    }
+
+    public Optional<Accident> findAccidentById(int id) {
+        if (accidents.containsKey(id)) {
+            return Optional.of(accidents.get(id));
+        }
+        return Optional.empty();
     }
 }

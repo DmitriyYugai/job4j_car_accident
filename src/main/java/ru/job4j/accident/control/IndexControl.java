@@ -5,8 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.job4j.accident.repository.AccidentMem;
 
-import java.util.Arrays;
-
 @Controller
 public class IndexControl {
     private final AccidentMem store;

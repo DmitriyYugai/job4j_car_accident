@@ -27,6 +27,7 @@
                             <td><c:out value="${accident.name}"/></td>
                             <td><c:out value="${accident.text}"/></td>
                             <td><c:out value="${accident.address}"/></td>
+                            <td><a href="<c:url value="/update?id=${accident.id}"/>">Редактировать инцидент</a></td>
                         </tr>
                     </c:forEach>
                 </tbody>
