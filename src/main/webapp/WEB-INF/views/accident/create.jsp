@@ -9,26 +9,56 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            var s = '';
+            var name = $('#name').val();
+            var text = $('#text').val();
+            var address = $('#address').val();
+            var type = $('#type').val();
+            var rules = $('#rIds').val();
+            if (name == '') {
+                s = s + ' ' + $('#nameLabel')[0].innerText;
+            }
+            if (text == '') {
+                s = s + ' ' + $('#textLabel')[0].innerText;
+            }
+            if (address == '') {
+                s = s + ' ' + $('#addressLabel')[0].innerText;
+            }
+            if (type == '') {
+                s = s + ' ' + $('#typeLabel')[0].innerText;
+            }
+            if (rules == '') {
+                s = s + ' ' + $('#rulesLabel')[0].innerText;
+            }
+            if (name == '' || text == '' || address == '' || type == '' || rules == '') {
+                alert('Заполните поля:' + s);
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
 
 <div class="container">
     <h2>Добавить инцидент</h2>
-    <form action="/accident/save" method="post">
+    <form action="/accident/save" method="post" onsubmit="return validate()">
         <div class="form-group">
-            <label for="name">Название</label>
+            <label id="nameLabel" for="name">Название</label>
             <input type="text" class="form-control" id="name" placeholder="Введите название" name="name">
         </div>
         <div class="form-group">
-            <label for="text">Описание</label>
+            <label id="textLabel" for="text">Описание</label>
             <input type="text" class="form-control" id="text" placeholder="Добавьте описание" name="text">
         </div>
         <div class="form-group">
-            <label for="address">Адрес</label>
+            <label id="addressLabel" for="address">Адрес</label>
             <input type="text" class="form-control" id="address" placeholder="Укажите адрес" name="address">
         </div>
         <div class="form-group">
-            <label for="type">Тип</label>
+            <label id="typeLabel" for="type">Тип</label>
             <select class="form-control" id="type" name="type.id">
                 <c:forEach var="type" items="${types}" >
                     <option value="${type.id}">${type.name}</option>
@@ -36,7 +66,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="rIds">Статьи</label>
+            <label id="rulesLabel" for="rIds">Статьи</label>
             <select class="form-control" id="rIds" name="rIds" multiple>
                 <c:forEach var="rule" items="${rules}" >
                     <option value="${rule.id}">${rule.name}</option>
