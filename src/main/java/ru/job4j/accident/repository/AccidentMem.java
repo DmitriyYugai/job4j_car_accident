@@ -62,10 +62,7 @@ public class AccidentMem {
     }
 
     public Optional<Accident> findAccidentById(int id) {
-        if (accidents.containsKey(id)) {
-            return Optional.of(accidents.get(id));
-        }
-        return Optional.empty();
+        return accidents.containsKey(id) ? Optional.of(accidents.get(id)) : Optional.empty();
     }
 
     public Collection<AccidentType> findAllAccidentTypes() {
@@ -73,21 +70,14 @@ public class AccidentMem {
     }
 
     public Optional<AccidentType> findAccidentTypeById(int id) {
-        if (types.containsKey(id)) {
-            return Optional.of(types.get(id));
-        }
-        return Optional.empty();
+        return types.containsKey(id) ? Optional.of(types.get(id)) : Optional.empty();
     }
 
     public Collection<Rule> findAllRules() {
         return rules.values();
     }
 
-
     public Optional<Rule> findRuleById(int id) {
-        if (rules.containsKey(id)) {
-            return Optional.of(rules.get(id));
-        }
-        return Optional.empty();
+            return rules.containsKey(id) ? Optional.of(rules.get(id)) : Optional.empty();
     }
 }
