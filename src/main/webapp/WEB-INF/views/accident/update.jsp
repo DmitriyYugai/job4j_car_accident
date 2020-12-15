@@ -44,7 +44,7 @@
 
 <div class="container">
     <h2>Редактировать инцидент</h2>
-    <form action="/accident/save?id=${accident.id}" method="post" onsubmit="return validate()">
+    <form action="/accident/update?id=${accident.id}" method="post" onsubmit="return validate()">
         <div class="form-group">
             <label id="nameLabel" for="name">Название</label>
             <input type="text" class="form-control" id="name" placeholder="Введите название" name="name" value=${accident.name}>

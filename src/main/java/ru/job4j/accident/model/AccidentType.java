@@ -41,4 +41,12 @@ public class AccidentType {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "AccidentType{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.repository.AccidentMem;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +17,9 @@ import java.net.http.HttpRequest;
 
 @Controller
 public class AccidentControl {
-    private final AccidentMem store;
+    private final AccidentJdbcTemplate store;
 
-    public AccidentControl(AccidentMem store) {
+    public AccidentControl(AccidentJdbcTemplate store) {
         this.store = store;
     }
 
@@ -46,6 +47,18 @@ public class AccidentControl {
             accident.addRule(store.findRuleById(Integer.parseInt(rId)).get());
         }
         store.save(accident);
+        return "redirect:/";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute Accident accident, HttpServletRequest request) {
+        AccidentType type = store.findAccidentTypeById(accident.getType().getId()).get();
+        accident.setType(type);
+        String[] rIds = request.getParameterValues("rIds");
+        for (String rId : rIds) {
+            accident.addRule(store.findRuleById(Integer.parseInt(rId)).get());
+        }
+        store.update(accident);
         return "redirect:/";
     }
 }
