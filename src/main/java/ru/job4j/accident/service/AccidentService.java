@@ -5,6 +5,8 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentJdbcTemplate;
+import ru.job4j.accident.repository.AccidentTypeJdbcTemplate;
+import ru.job4j.accident.repository.RuleJdbcTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,37 +14,35 @@ import java.util.function.Consumer;
 
 @Service
 public class AccidentService {
-    private final AccidentJdbcTemplate store;
+    private final AccidentJdbcTemplate accidentStore;
+    private final AccidentTypeJdbcTemplate typeStore;
+    private final RuleJdbcTemplate ruleStore;
 
-    public AccidentService(AccidentJdbcTemplate store) {
-        this.store = store;
-    }
-
-    public List<AccidentType> findAllAccidentTypes() {
-        return store.findAllAccidentTypes();
-    }
-
-    public List<Rule> findAllRules() {
-        return store.findAllRules();
+    public AccidentService(AccidentJdbcTemplate accidentStore,
+                           AccidentTypeJdbcTemplate typeStore,
+                           RuleJdbcTemplate ruleStore) {
+        this.accidentStore = accidentStore;
+        this.typeStore = typeStore;
+        this.ruleStore = ruleStore;
     }
 
     public Accident findAccidentById(int id) {
-        return store.findAccidentById(id).get();
+        return accidentStore.findAccidentById(id).get();
     }
 
     public void save(Accident accident, String[] rIds) {
-        saveUpdate(accident, rIds, accident1 -> store.save(accident));
+        saveUpdate(accident, rIds, accident1 -> accidentStore.save(accident));
     }
 
     public void update(Accident accident, String[] rIds) {
-        saveUpdate(accident, rIds, accident1 -> store.update(accident));
+        saveUpdate(accident, rIds, accident1 -> accidentStore.update(accident));
     }
 
     private void saveUpdate(Accident accident, String[] rIds, Consumer<Accident> cons) {
-        AccidentType type = store.findAccidentTypeById(accident.getType().getId()).get();
+        AccidentType type = typeStore.findAccidentTypeById(accident.getType().getId()).get();
         accident.setType(type);
         for (String rId : rIds) {
-            accident.addRule(store.findRuleById(Integer.parseInt(rId)).get());
+            accident.addRule(ruleStore.findRuleById(Integer.parseInt(rId)).get());
         }
         cons.accept(accident);
     }

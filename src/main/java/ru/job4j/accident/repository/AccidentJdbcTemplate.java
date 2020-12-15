@@ -144,56 +144,6 @@ public class AccidentJdbcTemplate {
         return Optional.of(accident);
     }
 
-    public List<AccidentType> findAllAccidentTypes() {
-        return jdbc.query(
-                "select * from types",
-                (rs, rowNum) -> {
-                    AccidentType type = new AccidentType();
-                    type.setId(rs.getInt("id"));
-                    type.setName(rs.getString("name"));
-                    return type;
-                });
-    }
-
-    public Optional<AccidentType> findAccidentTypeById(int id) {
-        return jdbc.query("select * " +
-                "from types " +
-                "where id = ?", rs -> {
-            if (!rs.next()) {
-                return Optional.empty();
-            }
-            AccidentType type = new AccidentType();
-            type.setId(rs.getInt("id"));
-            type.setName(rs.getString("name"));
-            return Optional.of(type);
-        }, id);
-    }
-
-    public List<Rule> findAllRules() {
-        return jdbc.query(
-                "select * from rules",
-                (rs, rowNum) -> {
-                    Rule rule = new Rule();
-                    rule.setId(rs.getInt("id"));
-                    rule.setName(rs.getString("name"));
-                    return rule;
-                });
-    }
-
-    public Optional<Rule> findRuleById(int id) {
-        return jdbc.query("select * " +
-                "from rules " +
-                "where id = ?", rs -> {
-            if (!rs.next()) {
-                return Optional.empty();
-            }
-            Rule rule = new Rule();
-            rule.setId(rs.getInt("id"));
-            rule.setName(rs.getString("name"));
-            return Optional.of(rule);
-        }, id);
-    }
-
     public static void main(String[] args) throws Exception {
         Properties props = new Properties();
         props.load(new FileReader("src/main/resources/app.properties"));

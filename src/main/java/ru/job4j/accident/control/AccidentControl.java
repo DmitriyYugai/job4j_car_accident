@@ -10,41 +10,47 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.service.AccidentService;
+import ru.job4j.accident.service.AccidentTypeService;
+import ru.job4j.accident.service.RuleService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.function.BiConsumer;
 
 @Controller
 public class AccidentControl {
-    private final AccidentService service;
+    private final AccidentService accidentService;
+    private final RuleService ruleService;
+    private final AccidentTypeService typeService;
 
-    public AccidentControl(AccidentService service) {
-        this.service = service;
+    public AccidentControl(AccidentService accidentService, RuleService ruleService, AccidentTypeService typeService) {
+        this.accidentService = accidentService;
+        this.ruleService = ruleService;
+        this.typeService = typeService;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types", service.findAllAccidentTypes());
-        model.addAttribute("rules", service.findAllRules());
+        model.addAttribute("types", typeService.findAllAccidentTypes());
+        model.addAttribute("rules", ruleService.findAllRules());
         return "accident/create";
     }
 
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
-        model.addAttribute("accident", service.findAccidentById(id));
-        model.addAttribute("types", service.findAllAccidentTypes());
-        model.addAttribute("rules", service.findAllRules());
+        model.addAttribute("accident", accidentService.findAccidentById(id));
+        model.addAttribute("types", typeService.findAllAccidentTypes());
+        model.addAttribute("rules", ruleService.findAllRules());
         return "accident/update";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest request) {
-        return saveUpdate(accident, request, (acc, rIds) -> service.save(acc, rIds));
+        return saveUpdate(accident, request, (acc, rIds) -> accidentService.save(acc, rIds));
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute Accident accident, HttpServletRequest request) {
-        return saveUpdate(accident, request, (acc, rIds) -> service.update(acc, rIds));
+        return saveUpdate(accident, request, (acc, rIds) -> accidentService.update(acc, rIds));
     }
 
     private String saveUpdate(Accident accident, HttpServletRequest request, BiConsumer<Accident, String[]> biCons) {
