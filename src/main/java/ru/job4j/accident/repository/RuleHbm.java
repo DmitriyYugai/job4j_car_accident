@@ -8,7 +8,7 @@ import ru.job4j.accident.model.Rule;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+//@Repository
 public class RuleHbm {
     private final SessionFactory sf;
 

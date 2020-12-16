@@ -2,21 +2,22 @@ package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
-import ru.job4j.accident.repository.RuleHbm;
-import ru.job4j.accident.repository.RuleJdbcTemplate;
+import ru.job4j.accident.repository.RuleRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class RuleService {
-    private final RuleHbm store;
+    private final RuleRepository store;
 
-    public RuleService(RuleHbm store) {
+    public RuleService(RuleRepository store) {
         this.store = store;
     }
 
     public List<Rule> findAllRules() {
-        return store.findAllRules();
+        List<Rule> rules = new ArrayList<>();
+        store.findAll().forEach(rules::add);
+        return rules;
     }
 }

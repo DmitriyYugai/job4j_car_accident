@@ -2,21 +2,22 @@ package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.AccidentType;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
-import ru.job4j.accident.repository.AccidentTypeHbm;
-import ru.job4j.accident.repository.AccidentTypeJdbcTemplate;
+import ru.job4j.accident.repository.AccidentTypeRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class AccidentTypeService {
-    private final AccidentTypeHbm store;
+    private final AccidentTypeRepository store;
 
-    public AccidentTypeService(AccidentTypeHbm store) {
+    public AccidentTypeService(AccidentTypeRepository store) {
         this.store = store;
     }
 
     public List<AccidentType> findAllAccidentTypes() {
-        return store.findAllAccidentTypes();
+        List<AccidentType> types = new ArrayList<>();
+        store.findAll().forEach(types::add);
+        return types;
     }
 }
