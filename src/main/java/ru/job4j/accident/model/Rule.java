@@ -1,8 +1,15 @@
 package ru.job4j.accident.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+
+@Entity
+@Table(name = "rules")
 public class Rule {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
@@ -11,6 +18,13 @@ public class Rule {
         rule.id = id;
         rule.name = name;
         return rule;
+    }
+
+    public Rule() {
+    }
+
+    public Rule(String name) {
+        this.name = name;
     }
 
     public int getId() {

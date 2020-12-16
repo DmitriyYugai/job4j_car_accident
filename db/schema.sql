@@ -4,26 +4,26 @@ DROP TABLE IF EXISTS rules;
 DROP TABLE IF EXISTS types;
 
 CREATE TABLE types (
-  id serial primary key,
-  name varchar(2000)
+                       id serial primary key,
+                       name varchar(2000)
 );
 
 CREATE TABLE rules (
-  id serial primary key,
-  name varchar(2000)
+                       id serial primary key,
+                       name varchar(2000)
 );
 
 CREATE TABLE accidents (
-  id serial primary key,
-  name varchar(2000),
-  text text,
-  address text,
-  type_id integer
+                           id serial primary key,
+                           name varchar(2000),
+                           text text,
+                           address text,
+                           type_id integer
 );
 
 CREATE TABLE accidents_rules (
-  accident_id integer references accidents(id),
-  rule_id integer references  rules(id)
+                                 accident_id integer references accidents(id),
+                                 rules_id integer references  rules(id)
 );
 
 INSERT INTO types(name) VALUES('Две машины');

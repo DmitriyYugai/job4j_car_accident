@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
-import ru.job4j.accident.repository.AccidentTypeJdbcTemplate;
-import ru.job4j.accident.repository.RuleJdbcTemplate;
+import ru.job4j.accident.repository.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,13 +12,11 @@ import java.util.function.Consumer;
 
 @Service
 public class AccidentService {
-    private final AccidentJdbcTemplate accidentStore;
-    private final AccidentTypeJdbcTemplate typeStore;
-    private final RuleJdbcTemplate ruleStore;
+    private final AccidentHbm accidentStore;
+    private final AccidentTypeHbm typeStore;
+    private final RuleHbm ruleStore;
 
-    public AccidentService(AccidentJdbcTemplate accidentStore,
-                           AccidentTypeJdbcTemplate typeStore,
-                           RuleJdbcTemplate ruleStore) {
+    public AccidentService(AccidentHbm accidentStore, AccidentTypeHbm typeStore, RuleHbm ruleStore) {
         this.accidentStore = accidentStore;
         this.typeStore = typeStore;
         this.ruleStore = ruleStore;
@@ -42,7 +38,8 @@ public class AccidentService {
         AccidentType type = typeStore.findAccidentTypeById(accident.getType().getId()).get();
         accident.setType(type);
         for (String rId : rIds) {
-            accident.addRule(ruleStore.findRuleById(Integer.parseInt(rId)).get());
+            Rule rule = ruleStore.findRuleById(Integer.parseInt(rId)).get();
+            accident.addRule(rule);
         }
         cons.accept(accident);
     }
