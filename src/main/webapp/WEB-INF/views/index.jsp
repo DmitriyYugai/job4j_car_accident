@@ -10,6 +10,12 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
+    <div class="container">
+        <h3>
+            <span>Список инцидентов</span>
+            <a href="/accident/logout" class='pull-right' style="font-size: smaller">Выйти</a>
+        </h3>
+    </div>
         <div class="container">
             <table class="table table-striped">
                 <thead>
