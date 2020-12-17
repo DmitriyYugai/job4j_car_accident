@@ -2,6 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -18,6 +23,8 @@
             }
         }
     </script>
+
+    <title>Регистрация</title>
 </head>
 <body>
 <div class="container pt-3">
@@ -25,17 +32,10 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                Авторизация
+                Регистрация
             </div>
-            <c:if test="${not empty errorMessage}">
-                <div class="card-header">
-                        <div style="color:red; font-weight: bold; margin: 30px 0px;">
-                                ${errorMessage}
-                        </div>
-                </div>
-            </c:if>
             <div class="card-body">
-                <form name="login"action="<c:url value='/login'/>" method='POST' onsubmit="return validate()">
+                <form action="/accident/reg" method="post" onsubmit="return validate()">
                     <div class="form-group">
                         <label>Имя пользователя</label>
                         <input type="text" class="form-control" name="username" id="username">
@@ -44,13 +44,7 @@
                         <label>Пароль</label>
                         <input type="text" class="form-control" name="password" id="password">
                     </div>
-                    <div class="row">
-                        <button type="submit" class="btn btn-primary">Войти</button>
-                        <a class="nav-link" href="/accident/reg">Регистрация</a>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    </div>
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
                 </form>
             </div>
         </div>

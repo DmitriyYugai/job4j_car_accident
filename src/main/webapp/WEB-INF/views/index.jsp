@@ -14,7 +14,8 @@
         <h3>
             <span>Список инцидентов</span>
             <a href="/accident/logout" class='pull-right' style="font-size: smaller">Выйти</a>
-            <span class='pull-right' style="font-size: smaller">${user.username} | </span>
+            <span class='pull-right' style="font-size: smaller">${user.username} | </span><br>
+            <a href="/accident/reg" class='pull-right' style="font-size: smaller">Регистрация</a>
         </h3>
     </div>
         <div class="container">
