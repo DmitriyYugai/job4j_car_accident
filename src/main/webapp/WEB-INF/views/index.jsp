@@ -14,6 +14,7 @@
         <h3>
             <span>Список инцидентов</span>
             <a href="/accident/logout" class='pull-right' style="font-size: smaller">Выйти</a>
+            <span class='pull-right' style="font-size: smaller">${user.username} | </span>
         </h3>
     </div>
         <div class="container">
