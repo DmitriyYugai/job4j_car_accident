@@ -135,5 +135,5 @@
 ![Проверка валидации 2](img/usage/valid2.PNG)<br><br>
 ![Проверка валидации 3](img/usage/valid3.PNG)<br><br>
 ## Контакты
-Почта: studentnstu97@mail.ru<br>
+Почта: dmitry_yugay@mail.ru<br>
 Skype: live:.cid.9cdc925fb48220b4
